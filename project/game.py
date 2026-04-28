@@ -28,7 +28,7 @@ def run_game(screen, clock):
 
     health_bar = Health(screen)
 
-    #Countdown before starting the song
+    # Countdown before starting the song
     countdown_font = pygame.font.SysFont("Arial", 100, True, False)
     dim_layer = pygame.Surface((WIDTH, HEIGHT))
     dim_layer.fill((0, 0, 0))
@@ -77,7 +77,7 @@ def run_game(screen, clock):
     drum2_sprite = pygame.sprite.Group()
     drum2_sprite.add(drum2)
 
-    # variables for swapping animations
+    # Variables for swapping animations
     show_second_animation = False
     ANIMATION_DURATION = 150
     second_animation_timer = 0
@@ -104,7 +104,7 @@ def run_game(screen, clock):
         screen.fill((20, 20, 20))
         health_bar.draw_hp_bar()
 
-        #lines for lanes and hit detection line
+        # Lines for lanes and hit detection line
         pygame.draw.line(screen, WHITE, (450, Y_HIT_LINE), (850, Y_HIT_LINE), 3)
         pygame.draw.line(screen, WHITE, (450, 0), (450, HEIGHT), 3)
         pygame.draw.line(screen, WHITE, (550, 0), (550, HEIGHT), 3)
@@ -124,7 +124,7 @@ def run_game(screen, clock):
                         paused(screen)
                 if event.unicode in KEYS:
                     lane = KEYS.index(event.unicode)
-                    #show the second drum frame
+                    # Show the second drum frame
                     show_second_animation = True
                     second_animation_timer = pygame.time.get_ticks()
 
@@ -202,7 +202,7 @@ def run_game(screen, clock):
         keybind4_text_surface = font.render(keybind_4, False, WHITE)
         screen.blit(keybind4_text_surface, (800, 610))
 
-        #draw the correct animation
+        # Draw the correct animation
         if show_second_animation and pygame.time.get_ticks() - second_animation_timer < ANIMATION_DURATION:
             drum2_sprite.draw(screen)
         else:

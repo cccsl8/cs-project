@@ -1,3 +1,5 @@
+# USE PYTHON 3.12 (64-BIT)
+
 import pygame
 from config import *
 from title_screen import run_title_screen
