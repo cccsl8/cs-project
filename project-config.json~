@@ -1,0 +1,13 @@
+{
+    "name": "chansz-python",
+    "description": "Project chansz-python",
+    "toolkit": "basic",
+    "sources": [
+        "src/main.bas"
+    ],
+    "build": "debug",
+    "definitions": [],
+    "includes": [],
+    "args": [],
+    "compiler": ""
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Songs",
+  "songs": [
+    {
+      "name": "Whiplash",
+      "artist": "Aespa",
+      "id": 0,
+      "file": "whiplash.mp3",
+      "bpm": 126,
+      "difficulty": 10,
+      "background": "whiplash background.jpg"
+    },
+    {
+      "name": "Bohemian Rhapsody (8-bit Version)",
+      "artist": "Queen",
+      "id": 1,
+      "file": "8BitBR.mp3",
+      "bpm": 72,
+      "difficulty": 9,
+      "background": "queen background.webp"
+    },
+    {
+      "name": "Smells Like Teen Spirit Remix",
+      "artist": "Nirvana",
+      "id": 2,
+      "file": "smells like teen spirit.mp3",
+      "bpm": 117,
+      "difficulty": 11,
+      "background": "nirvana background.webp"
+    }
+  ]
+}

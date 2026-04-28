@@ -1,0 +1,15 @@
+{
+  "data": {
+    "title": "Test",
+    "bpm": 120,
+    "offset": 0.0
+  },
+  "notes": [
+    { "lane": 0, "beat": 1 },
+    { "lane": 1, "beat": 1.5 },
+    { "lane": 2, "beat": 2 },
+    { "lane": 3, "beat": 2.5 },
+    { "lane": 2, "beat": 2.5 },
+    { "lane": 1, "beat": 4}
+  ]
+}
