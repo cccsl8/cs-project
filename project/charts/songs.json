@@ -27,6 +27,33 @@
       "bpm": 117,
       "difficulty": 11,
       "background": "nirvana background.webp"
+    },
+    {
+      "name": "Billie Jean",
+      "artist": "Michael Jackson",
+      "id": 3,
+      "file": "billie jean.mp3",
+      "bpm": 116,
+      "difficulty": 14,
+      "background": "mj background.webp"
+    },
+    {
+      "name": "A Cruel Angel's Thesis",
+      "artist": "Yoko Takahashi",
+      "id": 4,
+      "file": "a cruel angel's thesis.mp3",
+      "bpm": 128,
+      "difficulty": 12,
+      "background": "eva background.png"
+    },
+    {
+      "name": "test",
+      "artist": "n.a.",
+      "id": 5,
+      "file": "test silent audio.mp3",
+      "bpm": 128,
+      "difficulty": 12,
+      "background": "eva background.png"
     }
   ]
 }

@@ -1,5 +1,10 @@
 import pygame
+import json
 from config import *
+
+with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
+    data = json.load(f)
+songs = data["songs"]
 
 pygame.init()
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -7,10 +12,17 @@ clock = pygame.time.Clock()
 
 pygame.font.init()
 default_font = pygame.font.SysFont("Arial", 30, True, False)
-rating_font = pygame.font.SysFont("Arial", 60, True, False)
+rating_font = pygame.font.SysFont("Arial", 500, True, False)
+return_font = pygame.font.SysFont("Arial", 30, True, False)
+score_font = pygame.font.SysFont("Arial", 60, True, False)
+highest_combo_font = pygame.font.SysFont("Arial", 50, True, True)
 
 def run_end_screen(screen, clock):
-    from game import perfect, good, bad, miss
+    dim_layer = pygame.Surface((WIDTH, HEIGHT))
+    dim_layer.fill((0, 0, 0))
+    dim_layer.set_alpha(128)
+
+    from game import perfect, good, bad, miss, score, highest_combo
     rating = " "
     if miss >= 0 and miss <= 10:
         rating = "S"
@@ -31,24 +43,45 @@ def run_end_screen(screen, clock):
         for event in events:
             if event.type == pygame.QUIT:
                 return "Quit"
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if return_text_rect.collidepoint(event.pos):
+                    return "Menu"
+                elif retry_text_rect.collidepoint(event.pos):
+                    return "Game"
             
         screen.fill(BLACK)
+
+        from menu_screen import selected
+        bg = pygame.image.load(songs[selected]["background"])
+        bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
+        screen.blit(bg, bg.get_rect())
+        screen.blit(dim_layer, (0, 0))
         
-        rating_text = rating_font.render("Rating: " + rating, False, CYAN)
+        rating_text = rating_font.render(rating, False, CYAN)
         perfect_text = default_font.render("Perfect: " + str(perfect), False, WHITE)
         good_text = default_font.render("Good: " + str(good), False, WHITE)
         bad_text = default_font.render("Bad: " + str(bad), False, WHITE)
         miss_text = default_font.render("Miss: " + str(miss), False, WHITE)
+        return_text = return_font.render("<Return to main menu>", False, YELLOW)
+        retry_text = return_font.render("<Retry>", False, WHITE)
+        score_text = score_font.render("Score: " + str(score), False, WHITE)
+        highest_combo_text = highest_combo_font.render("Max. Combo: " + str(highest_combo), False, GREEN)
 
-        screen.blit(rating_text, (WIDTH // 2 - 165, HEIGHT // 2))
-        screen.blit(perfect_text, (WIDTH // 2 - 75, HEIGHT // 2 + 100))
-        screen.blit(good_text, (WIDTH // 2 - 75, HEIGHT // 2 + 150))
-        screen.blit(bad_text, (WIDTH // 2 - 75, HEIGHT // 2 + 200))
-        screen.blit(miss_text, (WIDTH // 2 - 75, HEIGHT // 2 + 250))
+        screen.blit(rating_text, (WIDTH // 2 + 200, HEIGHT // 2 - 300))
+        screen.blit(perfect_text, (10, HEIGHT // 2 + 100))
+        screen.blit(good_text, (10, HEIGHT // 2 + 150))
+        screen.blit(bad_text, (10, HEIGHT // 2 + 200))
+        screen.blit(miss_text, (10, HEIGHT // 2 + 250))
+        screen.blit(return_text, (10, 0))
+        screen.blit(retry_text, (10, 50))
+        screen.blit(score_text, (10, HEIGHT // 2 - 125))
+        screen.blit(highest_combo_text, (10, HEIGHT // 2 - 65))
+
+        return_text_rect = return_text.get_rect(topleft=(10, 0))
+        retry_text_rect = retry_text.get_rect(topleft=(10, 50))
 
         pygame.display.flip()
         clock.tick(FPS)
 
-    return "Menu"
         
             

@@ -14,7 +14,7 @@ from background import *
 def run_game(screen, clock):
     from menu_screen import selected
     global perfect, good, bad, miss
-    with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\chansz-python\project\charts\songs.json", "r") as f:
+    with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
         data = json.load(f)
     songs = data["songs"]
     
@@ -26,6 +26,8 @@ def run_game(screen, clock):
     font = pygame.font.SysFont("Arial", 30)
     artist_font = pygame.font.SysFont("Arial", 20)
 
+    combo = 0
+    combo_multiplier = 1
     health_bar = Health(screen)
 
     # Countdown before starting the song
@@ -68,6 +70,7 @@ def run_game(screen, clock):
 
     hit_text = None
     text_timer = 0
+    global score
     score = 0
 
     drum1 = Drum1(900, 426)
@@ -91,11 +94,13 @@ def run_game(screen, clock):
     global good
     global bad
     global miss
+    global highest_combo
     perfect = 0
     good = 0
     bad = 0
     miss = 0
-
+    highest_combo = 0
+    
     global is_paused
     is_paused = False
     running = True
@@ -121,7 +126,10 @@ def run_game(screen, clock):
                 if event.key == pygame.K_ESCAPE:
                     is_paused = not is_paused
                     if is_paused:
-                        paused(screen)
+                        pause_result = paused(screen)
+                        is_paused = False
+                        if pause_result in ("Menu", "Game", "Quit"):
+                            return pause_result
                 if event.unicode in KEYS:
                     lane = KEYS.index(event.unicode)
                     # Show the second drum frame
@@ -142,14 +150,31 @@ def run_game(screen, clock):
                             if result:
                                 print(result)
                                 if result == "Perfect!":
+                                    combo = combo + 1
+                                    if combo >= 10:
+                                        multiplier = 1 + min(combo // 10, 10) / 10
+                                        score = score + 100 * multiplier
+                                        combo_multiplier = multiplier
                                     score = score + 100
                                     perfect = perfect + 1
+                                    if combo > highest_combo:
+                                        highest_combo = combo
                                 elif result == "Good!":
+                                    combo = combo + 1
+                                    if combo >= 10:
+                                        multiplier = 1 + min(combo // 10, 10) / 10
+                                        score = score + 50 * multiplier
+                                        combo_multiplier = multiplier
                                     score = score + 50
                                     good = good + 1
+                                    if combo > highest_combo:
+                                        highest_combo = combo
                                 elif result == "Bad":
+                                    multiplier = 1
+                                    combo_multiplier = multiplier
                                     score = score + 10
                                     bad = bad + 1
+                                    combo = 0
                                 hit_text = result
                                 text_timer = pygame.time.get_ticks()
                                 note.hit = True
@@ -163,6 +188,7 @@ def run_game(screen, clock):
             if note.y > Y_HIT_LINE and not note.hit and not note.missed:
                 note.missed = True
                 miss = miss + 1
+                combo = 0
                 health_bar.deduct_hp()
                 hit_text = "Miss"
                 text_timer = pygame.time.get_ticks()
@@ -188,6 +214,11 @@ def run_game(screen, clock):
         score_text = str(score)
         score_text_surface = font.render(score_text, False, WHITE)
         screen.blit(score_text_surface, (0, 189))
+
+        combo_text = str(combo)
+        multiplier_text = str(combo_multiplier)
+        combo_text_surface = font.render("Combo: " + combo_text + " " + "(" + multiplier_text + "x" + ")", False, YELLOW)
+        screen.blit(combo_text_surface, (0, 300))
 
         keybind_1 = KEYS[0]
         keybind1_text_surface = font.render(keybind_1, False, WHITE)

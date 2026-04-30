@@ -2,7 +2,7 @@ import pygame
 import gif_pygame as gp
 from config import *
 
-TITLE_MUSIC = r"C:\Users\cszel\OneDrive\Documents\GitHub\chansz-python\menu_theme.mp3"
+TITLE_MUSIC = r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\menu_theme.mp3"
 
 def run_title_screen(screen, clock):
     pygame.font.init()

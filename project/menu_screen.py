@@ -1,9 +1,10 @@
 import pygame
 from config import *
 import json
+import os
 from album_covers import *
 
-with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\chansz-python\project\charts\songs.json", "r") as f:
+with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
     data = json.load(f)
 songs = data["songs"]
 
@@ -26,6 +27,12 @@ selected = 0
 
 def run_menu_screen(screen, clock):
     global selected
+    
+    # Making sure selected is within the range of the song list
+    if selected >= len(songs):
+        selected = len(songs) - 1
+    if selected < 0:
+        selected = 0
     
     dim_layer = pygame.Surface((WIDTH, HEIGHT))
     dim_layer.fill((0, 0, 0))
@@ -56,6 +63,7 @@ def run_menu_screen(screen, clock):
 
         #background
         bg = pygame.image.load(songs[selected]["background"])
+        bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
         screen.blit(bg, bg.get_rect())
         screen.blit(dim_layer, (0, 0))
 

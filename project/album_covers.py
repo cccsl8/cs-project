@@ -4,7 +4,10 @@ from config import *
 album_cover_list = [
     "whiplash cover.jpg",
     "BR_cover.jpg",
-    "nirvana album cover.jpg"
+    "nirvana album cover.jpg",
+    "mj cover.jpg",
+    "eva cover.jpg",
+    "eva cover.jpg"
 ]
 
 class AlbumCover(pygame.sprite.Sprite):
