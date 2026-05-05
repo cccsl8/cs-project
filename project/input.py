@@ -5,11 +5,11 @@ CYAN = (0, 255, 255)
 
 def isHit(note):
     distance = abs(note.y - Y_HIT_LINE)
-    if distance < 15:
+    if distance < 25:
         return "Perfect!"
-    elif distance < 30 and distance > 15:
+    elif distance < 35 and distance > 25:
         return "Good!"
-    elif distance > 30 and distance < 60:
+    elif distance > 35 and distance < 60:
         return "Bad"
     else: 
         return "Miss"

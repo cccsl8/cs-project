@@ -194,8 +194,7 @@ def run_game(screen, clock):
                 text_timer = pygame.time.get_ticks()
                 
         if health_bar.get_hp() <= 0:
-            gameOver_text = font.render("You lost...", False, WHITE)
-            screen.blit(gameOver_text, (300, 284))
+            return "GameOver"
             
         if hit_text:
             if pygame.time.get_ticks() - text_timer < 1000:
