@@ -10,6 +10,7 @@ from input import *
 from loadNotes import *
 from health import *
 from background import *
+from leaderboard import *
 
 def run_game(screen, clock):
     from menu_screen import selected
