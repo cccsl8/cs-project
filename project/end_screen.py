@@ -22,6 +22,27 @@ def run_end_screen(screen, clock):
     dim_layer.fill((0, 0, 0))
     dim_layer.set_alpha(128)
 
+    from leaderboard import Leaderboard, draw_enter_name, draw_leaderboard
+    from game import score
+
+    leaderboard = Leaderboard()
+    player_name = ""
+    entering_name = True
+
+    if score != 0 and leaderboard.is_high_score(score):
+        while entering_name:
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.QUIT:
+                    return "Quit"
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN and len(player_name) > 0:
+                        leaderboard.add_score(player_name, score)
+                    elif event.key == pygame.K_BACKSPACE:
+                        player_name = player_name[:-1]
+
+            draw_enter_name(score, player_name)
+
     from game import perfect, good, bad, miss, score, highest_combo
     rating = " "
     if miss >= 0 and miss <= 10:
@@ -79,6 +100,8 @@ def run_end_screen(screen, clock):
 
         return_text_rect = return_text.get_rect(topleft=(10, 0))
         retry_text_rect = retry_text.get_rect(topleft=(10, 50))
+
+        draw_leaderboard(leaderboard)
 
         pygame.display.flip()
         clock.tick(FPS)

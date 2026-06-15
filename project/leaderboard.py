@@ -5,6 +5,8 @@ from config import *
 from datetime import datetime
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
+
+pygame.font.init()
 default_font = pygame.font.SysFont("Arial", 30, False, False)
 large_font = pygame.font.SysFont("Arial", 50, True, False)
 
@@ -24,7 +26,7 @@ class Leaderboard:
     
     def save(self):
         with open(self.filename, "w") as f:
-            json.dump(self.scores, f, indent=2)
+            json.dump(self.scores, f, indent=2) # Append scores into json file
     
     def add_score(self, name, score):
         entry = {
@@ -33,14 +35,14 @@ class Leaderboard:
             "date": datetime.now()
         }
         self.scores.append(entry)
-        self.scores.sort(key=lambda x: x["score"], reverse=True)
+        self.scores.sort(key=lambda x: x["score"], reverse=True) # Sorts the score in descending order with "score" being the key
         self.scores = self.scores[:self.max_entries]
         self.save()
     
     def is_high_score(self, score):
-        if len(self.score) < self.max_entries:
-            return True
-        return score > self.scores[-1]["scores"]
+        if len(self.scores) < self.max_entries: # Check if leaderboard (top 10) is already full
+            return True # Add score to leaderboard if it's not full
+        return score > self.scores[-1]["score"] # Compares new score with the lowest score in the leaderboard. Returns True if the new score is higher.
     
 def draw_leaderboard(leaderboard):
     screen.fill((20, 20, 40))
@@ -64,5 +66,5 @@ def draw_enter_name(score, player_name):
     score_surface = default_font.render(f"Score: {score}", True, WHITE)
     screen.blit(score_surface, (WIDTH // 2, 240))
 
-    name_surf = default_font.render(f"Enter name: {player_name}", True, (100, 220, 255))
-    screen.blit(name_surf, (WIDTH // 2, 310))
+    name_surface = default_font.render(f"Enter name: {player_name}", True, (100, 220, 255))
+    screen.blit(name_surface, (WIDTH // 2, 310))

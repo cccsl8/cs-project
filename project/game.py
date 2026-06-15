@@ -74,6 +74,8 @@ def run_game(screen, clock):
     global score
     score = 0
 
+    leaderboard = Leaderboard()
+
     drum1 = Drum1(900, 426)
     drum2 = Drum2(900, 426)
     drum1_sprite = pygame.sprite.Group()
@@ -110,7 +112,7 @@ def run_game(screen, clock):
         screen.fill((20, 20, 20))
         health_bar.draw_hp_bar()
 
-        # Lines for lanes and hit detection line
+        # Redraw lines for lanes and hit detection line
         pygame.draw.line(screen, WHITE, (450, Y_HIT_LINE), (850, Y_HIT_LINE), 3)
         pygame.draw.line(screen, WHITE, (450, 0), (450, HEIGHT), 3)
         pygame.draw.line(screen, WHITE, (550, 0), (550, HEIGHT), 3)
@@ -136,7 +138,8 @@ def run_game(screen, clock):
                     # Show the second drum frame
                     show_second_animation = True
                     second_animation_timer = pygame.time.get_ticks()
-
+                    
+                    # Display different colours for each lane pressed
                     if lane == 0:
                         pygame.draw.rect(screen, RED, (450, 610, 100, 110))
                     elif lane == 1:

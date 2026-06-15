@@ -4,10 +4,5 @@
         "bpm": 128,
         "offset": 0
     },
-    "notes": [
-        {
-            "lane": 0,
-            "beat": 2
-        }
-    ]
+    "notes": []
 }

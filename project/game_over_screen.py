@@ -27,14 +27,14 @@ def run_game_over_screen(screen, clock):
         game_over_text = default_font.render("You lost...", False, RED)
         return_text = return_font.render("<Return to main menu>", False, YELLOW)
         retry_text = return_font.render("<Retry>", False, WHITE)
-        
+
         screen.blit(game_over_text, (WIDTH // 2 - 150, HEIGHT // 2 - 100))
         screen.blit(return_text, (600, 400))
         screen.blit(retry_text, (450, 400))
 
         return_text_rect = return_text.get_rect(topleft=(600, 400))
         retry_text_rect = retry_text.get_rect(topleft=(450, 400))
-        
+
         pygame.display.flip()
         clock.tick(FPS)
 

@@ -18,6 +18,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
+    leaderboard.load()
+
     screen.fill(BLACK)
     pygame.display.flip()
     clock.tick(FPS)
