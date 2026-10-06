@@ -1,9 +1,4 @@
 import random
-import json
-
-with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\chansz-python\project\charts\songs.json", "r") as f:
-    data = json.load(f)
-songs = data["songs"]
 
 def generate_chart(
     song_length_seconds,

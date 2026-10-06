@@ -4,7 +4,7 @@ import json
 import os
 from album_covers import *
 
-with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
+with open(r"C:\Users\Sze Long Chan\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
     data = json.load(f)
 songs = data["songs"]
 

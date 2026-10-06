@@ -2,7 +2,7 @@ import pygame
 import gif_pygame as gp
 from config import *
 
-TITLE_MUSIC = r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\menu_theme.mp3"
+TITLE_MUSIC = r"C:\Users\Sze Long Chan\OneDrive\Documents\GitHub\cs-project\menu_theme.mp3"
 
 def run_title_screen(screen, clock):
     pygame.font.init()
@@ -45,9 +45,9 @@ def run_title_screen(screen, clock):
         current_animation.render(screen, (0, 0))
         screen.blit(dim_layer, (0, 0))
 
-        menu_text = "DRUM HERO"
-        menu_text_surface = default_font.render(menu_text, False, CYAN)
-        screen.blit(menu_text_surface, (500, 331))
+        title_text = "DRUM HERO"
+        title_text_surface = default_font.render(title_text, False, CYAN)
+        screen.blit(title_text_surface, (500, 331))
 
         start_text = "Press Space to start"
         start_text_surface = start_text_font.render(start_text, False, WHITE)

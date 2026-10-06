@@ -1,12 +1,20 @@
 import json
+import os
 import pygame
 from config import *
 from generateNotes import generate_chart
 from mutagen.mp3 import MP3
 
-with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
-    data = json.load(f)
-songs = data["songs"]
+# Load songs.json relative to this file to avoid hardcoded absolute paths
+songs_path = os.path.join(os.path.dirname(__file__), "charts", "songs.json")
+try:
+    with open(songs_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except FileNotFoundError:
+    raise FileNotFoundError(f"Songs JSON not found at {songs_path}")
+except OSError as e:
+    raise OSError(f"Error reading songs JSON at {songs_path}: {e}")
+songs = data.get("songs", [])
 
 pygame.init()
 pygame.font.init()

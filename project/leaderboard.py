@@ -10,7 +10,7 @@ pygame.font.init()
 default_font = pygame.font.SysFont("Arial", 30, False, False)
 large_font = pygame.font.SysFont("Arial", 50, True, False)
 
-SCORES_FILE = r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\scores.json"
+SCORES_FILE = r"C:\Users\Sze Long Chan\OneDrive\Documents\GitHub\cs-project\project\scores.json"
 
 class Leaderboard:
     def __init__(self, filename = SCORES_FILE, max_entries = 10):
@@ -20,19 +20,22 @@ class Leaderboard:
 
     def load(self):
         if os.path.exists(self.filename):
-            with open(self.filename, "r") as f:
-                return json.load(f)
+            with open(self.filename, "r", encoding="utf-8") as f:
+                try:
+                    return json.load(f)
+                except json.JSONDecodeError:
+                    return []
         return []
     
     def save(self):
-        with open(self.filename, "w") as f:
-            json.dump(self.scores, f, indent=2) # Append scores into json file
+        with open(self.filename, "w", encoding="utf-8") as f:
+            json.dump(self.scores, f, indent=2)
     
     def add_score(self, name, score):
         entry = {
             "name": name,
             "score": score,
-            "date": datetime.now()
+            "date": datetime.now().isoformat()
         }
         self.scores.append(entry)
         self.scores.sort(key=lambda x: x["score"], reverse=True) # Sorts the score in descending order with "score" being the key

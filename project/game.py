@@ -15,7 +15,7 @@ from leaderboard import *
 def run_game(screen, clock):
     from menu_screen import selected
     global perfect, good, bad, miss
-    with open(r"C:\Users\cszel\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
+    with open(r"C:\Users\Sze Long Chan\OneDrive\Documents\GitHub\cs-project\project\charts\songs.json", "r") as f:
         data = json.load(f)
     songs = data["songs"]
     
@@ -189,7 +189,7 @@ def run_game(screen, clock):
                 note.update(current_time)
                 note.draw(screen, X_LANE[note.lane])
 
-            if note.y > Y_HIT_LINE and not note.hit and not note.missed:
+            if note.y > Y_HIT_LINE + 50 and not note.hit and not note.missed:
                 note.missed = True
                 miss = miss + 1
                 combo = 0
